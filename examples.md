@@ -11,8 +11,8 @@ curl 'https://vanchin.streamlake.ai/api/gateway/v1/endpoints/chat/completions' \
 -H "Authorization: Bearer $VC_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
-    "model": "ep-59dwym-1761224975357840539", 
-    "messages": [ 
+    "model": "ep-59dwym-1761224975357840539",
+    "messages": [
         {
             "role": "system",
             "content": "You are an AI assistant."
@@ -159,8 +159,15 @@ export ANTHROPIC_BASE_URL="https://vanchin.streamlake.ai/api/gateway/v1/endpoint
 # 设置API Key
 export ANTHROPIC_AUTH_TOKEN="$VC_API_KEY"
 
+# 设置模型名称
+export ANTHROPIC_MODEL="KAT-Coder"
+export ANTHROPIC_SMALL_FAST_MODEL="KAT-Coder"
+
 # Windows 环境变量设置
-setx ANTHROPIC_AUTH_TOKEN "$VC_API_KEY"
+setx ANTHROPIC_AUTH_TOKEN "your-vanchin-api-key-here"
+setx ANTHROPIC_BASE_URL "https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-59dwym-1761224975357840539/claude-code-proxy"
+setx ANTHROPIC_MODEL "KAT-Coder"
+setx ANTHROPIC_SMALL_FAST_MODEL "KAT-Coder"
 ```
 
 #### 运行 Claude Code
@@ -227,4 +234,5 @@ A: 请妥善保管您的 API Key，不要在代码中硬编码或在公共场合
 如需更多技术支持，请参考：
 - [集成指南](integration-guide.html)
 - [文档](documentation.html)
-- [StreamLake 官方文档](https://www.streamlake.ai)
+- [StreamLake 官方网站](https://www.streamlake.ai)
+- [StreamLake 官方文档](https://www.streamlake.ai/document/DOC/mg6k6nlp8j6qxicx4c9)

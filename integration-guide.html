@@ -1,18 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta name="description" content="KAT-Coder开发工具集成详细指南，包含Vanchin API Key获取、推理端点创建和Claude Code、Cline、Kilo Code、Roo Code等工具的配置步骤。">
+    <meta name="description"
+        content="KAT-Coder开发工具集成详细指南，包含Vanchin API Key获取、推理端点创建和Claude Code、Cline、Kilo Code、Roo Code等工具的配置步骤。">
     <meta name="keywords" content="KAT-Coder, 集成指南, Vanchin API, Claude Code, Cline, Kilo Code, Roo Code, API配置">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KAT-Coder 开发工具集成指南</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="vscode-dark-theme.css">
+    <!-- 移动端优化样式 -->
+    <style>
+        @media (max-width: 768px) {
+            .integration-section {
+                padding: 3rem 0;
+            }
+
+            .integration-title {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .integration-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .tool-card {
+                margin-bottom: 1.5rem;
+                height: auto;
+            }
+
+            .tool-icon {
+                font-size: 2.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .tool-title {
+                font-size: 1.25rem;
+            }
+
+            .code-block {
+                margin-bottom: 1rem;
+            }
+
+            .copy-btn {
+                padding: 0.5rem;
+                font-size: 0.875rem;
+            }
+
+            .integration-steps .step-item {
+                padding-left: 2.5rem;
+            }
+
+            .integration-steps .step-number {
+                width: 2rem;
+                height: 2rem;
+                font-size: 0.875rem;
+                left: -1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .integration-section {
+                padding: 2rem 0;
+            }
+
+            .integration-title {
+                font-size: 2rem;
+            }
+
+            .integration-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .tool-card {
+                padding: 1.5rem;
+            }
+
+            .tool-icon {
+                font-size: 2rem;
+            }
+
+            .tool-title {
+                font-size: 1.125rem;
+            }
+
+            .code-block {
+                margin-bottom: 1rem;
+            }
+
+            .copy-btn {
+                padding: 0.4rem;
+                font-size: 0.8rem;
+            }
+
+            .integration-steps .step-item {
+                padding-left: 2rem;
+            }
+
+            .integration-steps .step-number {
+                width: 1.75rem;
+                height: 1.75rem;
+                font-size: 0.8rem;
+                left: -0.875rem;
+            }
+
+            .integration-steps .step-connector {
+                left: 0;
+            }
+        }
+    </style>
 </head>
+
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html"><i class="fas fa-robot me-2"></i>KAT-Coder</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -23,7 +134,6 @@
                     <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
                     <li class="nav-item"><a class="nav-link active" href="integration-guide.html">集成指南</a></li>
                     <li class="nav-item"><a class="nav-link" href="documentation.html">文档</a></li>
-
                 </ul>
             </div>
         </div>
@@ -35,7 +145,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <h1 class="display-4 fw-bold mb-4">KAT-Coder 开发工具集成指南</h1>
-                    <p class="lead mb-4">KAT-Coder 系列模型专为 Agentic Coding 任务设计。其中 KAT-Coder-Pro 和 KAT-Coder-Air 模型支持与 Claude Code、Cline、Kilo Code 和 Roo Code 集成。</p>
+                    <p class="lead mb-4">KAT-Coder 系列模型专为 Agentic Coding 任务设计。其中 KAT-Coder-Pro 和 KAT-Coder-Air 模型支持与
+                        Claude Code、Cline、Kilo Code 和 Roo Code 集成。</p>
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle me-2"></i>
                         从 Vanchin 平台获取 API Key 并创建推理端点后，您就可以在各种 Agent 产品中配置和使用。
@@ -49,7 +160,7 @@
     <section class="py-5">
         <div class="container">
             <h2 class="fw-bold mb-4">获取 Vanchin API Key 并创建 KAT-Coder 推理端点</h2>
-            
+
             <!-- API Key Section -->
             <div class="card mb-4">
                 <div class="card-header">
@@ -58,11 +169,12 @@
                 <div class="card-body">
                     <h4>获取 API Key</h4>
                     <p>登录 Vanchin 平台 > 左侧菜单 [API Key] > 点击"Create API Key"</p>
-                    
+
                     <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/T6Ykm9CZwWhq3Dy0IxBMthSY02sfvoSuQD2u0Aja1pM" alt="API Key 配置" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/T6Ykm9CZwWhq3Dy0IxBMthSY02sfvoSuQD2u0Aja1pM"
+                            alt="API Key 配置" class="img-fluid rounded shadow" loading="lazy">
                     </div>
-                    
+
                     <div class="table-responsive mb-4">
                         <table class="table table-bordered">
                             <thead>
@@ -83,25 +195,41 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle me-2"></i>
                         <strong>重要：</strong>请安全保管生成的 API Key。
                     </div>
-                    
+
                     <h4>配置 API Key</h4>
-                    <div class="card bg-light">
+                    <div class="card bg-light mb-4">
                         <div class="card-body">
-                            <h5>环境变量配置（推荐）：</h5>
-                            <pre><code>export VC_API_KEY="your-api-key-here"</code></pre>
+                            <h5 class="mb-3">环境变量配置（推荐）：</h5>
+                            <div class="code-block position-relative">
+                                <pre><code id="api-key-code">export VC_API_KEY="your-api-key-here"</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="api-key-code">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
+                            </div>
+                            <div class="alert alert-info mt-3">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                <small>提示：将此环境变量添加到您的 shell 配置文件中（如 ~/.bashrc、~/.zshrc 或 ~/.bash_profile）</small>
+                            </div>
                         </div>
                     </div>
-                    
+
                     <h4>Python SDK 调用示例</h4>
                     <div class="card bg-light">
                         <div class="card-body">
-                            <h5>使用 OpenAI Python SDK：</h5>
-                            <pre><code>import os
+                            <h5 class="mb-3">使用 OpenAI Python SDK：</h5>
+                            <div class="mb-3">
+                                <span class="badge bg-secondary me-2">安装命令</span>
+                                <code>pip install openai</code>
+                            </div>
+                            <div class="code-block position-relative">
+                                <pre><code id="python-sdk-code">import os
 from openai import OpenAI
 
 # 初始化 OpenAI 客户端
@@ -119,15 +247,87 @@ completion = client.chat.completions.create(
     ],
 )
 print(completion.choices[0].message.content)</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="python-sdk-code">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
+                            </div>
+                            <div class="alert alert-warning mt-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <small>注意：请将 <code>ep-59dwym-1761224975357840539</code> 替换为您自己的推理端点 ID</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>流式输出示例</h4>
+                    <div class="card bg-light mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-3">Python SDK 流式调用：</h5>
+                            <div class="code-block position-relative">
+                                <pre><code id="streaming-code">import os
+from openai import OpenAI
+
+# 初始化 OpenAI 客户端
+client = OpenAI(
+    base_url="https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+    api_key=os.environ.get("VC_API_KEY")
+)
+
+# 流式对话
+completion = client.chat.completions.create(
+    model="ep-59dwym-1761224975357840539",
+    messages=[
+        {"role": "system", "content": "You are an AI assistant"},
+        {"role": "user", "content": "Please introduce the eight planets of the solar system"},
+    ],
+    stream=True  # 启用流式输出
+)
+
+for chunk in completion:
+    if chunk.choices[0].delta.content is not None:
+        print(chunk.choices[0].delta.content, end="", flush=True)
+print()</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="streaming-code">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>REST API 调用示例</h4>
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h5 class="mb-3">使用 curl 命令：</h5>
+                            <div class="code-block position-relative">
+                                <pre><code id="rest-api-code">curl -X POST "https://vanchin.streamlake.ai/api/gateway/v1/endpoints" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $VC_API_KEY" \
+  -d '{
+    "model": "ep-59dwym-1761224975357840539",
+    "messages": [
+      {"role": "system", "content": "You are an AI assistant"},
+      {"role": "user", "content": "Please introduce the eight planets of the solar system"}
+    ],
+    "stream": false
+  }'</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="rest-api-code">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
+                            </div>
                             <div class="alert alert-info mt-3">
                                 <i class="fas fa-info-circle me-2"></i>
-                                <small>安装命令：<code>pip install openai</code></small>
+                                <small>将 <code>stream</code> 设置为 <code>true</code> 可启用流式输出</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Inference Endpoint Section -->
             <div class="card">
                 <div class="card-header">
@@ -136,26 +336,30 @@ print(completion.choices[0].message.content)</code></pre>
                 <div class="card-body">
                     <h4>准备在线推理端点</h4>
                     <p>登录 Vanchin 平台 > 左侧菜单 <strong>[模型] → [推理]</strong> > 点击"创建推理端点"</p>
-                    
+
                     <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/aq223fugyGaF0Qavc73KV0GIxM3i-lZtEvRRdXrFZa0" alt="创建推理端点" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/aq223fugyGaF0Qavc73KV0GIxM3i-lZtEvRRdXrFZa0"
+                            alt="创建推理端点" class="img-fluid rounded shadow" loading="lazy">
                     </div>
-                    
+
                     <p>选择 <strong>KAT-Coder</strong> 模型。</p>
-                    
+
                     <div class="row mb-4">
                         <div class="col-md-6">
-                            <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/nnFbXuTtEYXeLJLPRLtRQfyEYCJEzr2gj8lm4WO8Zhg" alt="选择 KAT-Coder 模型" class="img-fluid rounded shadow" loading="lazy">
+                            <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/nnFbXuTtEYXeLJLPRLtRQfyEYCJEzr2gj8lm4WO8Zhg"
+                                alt="选择 KAT-Coder 模型" class="img-fluid rounded shadow" loading="lazy">
                         </div>
                         <div class="col-md-6">
-                            <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/Sh-PVIyF2NJ6quvtfXwxi2xgC1Puvs2MOI6pmoJ_mME" alt="模型配置" class="img-fluid rounded shadow" loading="lazy">
+                            <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/Sh-PVIyF2NJ6quvtfXwxi2xgC1Puvs2MOI6pmoJ_mME"
+                                alt="模型配置" class="img-fluid rounded shadow" loading="lazy">
                         </div>
                     </div>
-                    
+
                     <p>在在线推理页面，找到相应的推理端点并复制推理端点 ID。</p>
-                    
+
                     <div class="text-center">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/6xmH32RR3-X0RJgfs7UDjt1ojujsYocMc_bi0Mdltdk" alt="复制推理端点 ID" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/6xmH32RR3-X0RJgfs7UDjt1ojujsYocMc_bi0Mdltdk"
+                            alt="复制推理端点 ID" class="img-fluid rounded shadow" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -166,78 +370,112 @@ print(completion.choices[0].message.content)</code></pre>
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="fw-bold mb-4">Claude Code</h2>
-            <p>配置以下环境变量以在 Claude Code 中使用 Vanchin 提供的 KAT-Coder 模型：</p>
-            
-            <div class="card mb-4">
-                <div class="card-body">
-                    <ul>
-                        <li><strong>ANTHROPIC_BASE_URL:</strong> 设置为您的 Vanchin 推理端点 URL</li>
-                        <li><strong>ANTHROPIC_AUTH_TOKEN:</strong> 设置为您的 Vanchin API KEY</li>
-                        <li><strong>ANTHROPIC_MODEL & ANTHROPIC_SMALL_FAST_MODEL:</strong> 设置为 "KAT-Coder"</li>
-                    </ul>
-                    
-                    <div class="alert alert-warning">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        <strong>注意：</strong>目前仅支持 KAT-Coder 模型。您无法通过 ANTHROPIC_MODEL 环境变量修改使用的模型。
-                    </div>
-                </div>
+            <p class="lead">在 Claude Code 中使用 Vanchin 提供的 KAT-Coder 模型，请配置以下环境变量：</p>
+
+            <div class="alert alert-info mb-4">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>● ANTHROPIC_BASE_URL:</strong> 设置为
+                <code>https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-xxx-xxx/claude-code-proxy</code>，将
+                <code>ep-xxx-xxx</code> 替换为您的 Vanchin 推理端点 ID<br>
+                <strong>● ANTHROPIC_AUTH_TOKEN:</strong> 设置为您的 Vanchin API KEY<br>
+                <strong>● ANTHROPIC_MODEL & ANTHROPIC_SMALL_FAST_MODEL:</strong> 设置为 "KAT-Coder"
             </div>
-            
+
+            <div class="alert alert-warning mb-4">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <strong>注意：</strong>目前仅支持 KAT-Coder 模型。您无法通过 ANTHROPIC_MODEL 环境变量修改使用的模型。
+            </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>一、Claude Code 安装和配置</h4>
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0"><i class="fab fa-apple me-2"></i>macOS</h4>
                         </div>
                         <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>macOS</th>
-                                            <th>Windows</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><code>npm install -g @anthropic-ai/claude-code</code></td>
-                                            <td>
-                                                Claude Code only supports macOS and Linux by default. You need to install WSL or Git for Windows first. Please refer to the official documentation.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                                <code>export ANTHROPIC_BASE_URL="https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-59dwym-1761224975357840539/claude-code-proxy"</code><br>
-                                                使用您的 Vanchin 推理端点 ID
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><code>export ANTHROPIC_AUTH_TOKEN="$VC_API_KEY"</code></td>
-                                            <td><code>setx ANTHROPIC_AUTH_TOKEN "$VC_API_KEY"</code></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <h5>1. Claude Code 安装</h5>
+                            <div class="code-block position-relative mb-4">
+                                <pre><code id="claude-install-macos">npm install -g @anthropic-ai/claude-code</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="claude-install-macos">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
                             </div>
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle me-2"></i>
-                                <strong>集成文档：</strong>详细集成文档请参考：<a href="https://www.streamlake.ai/document/DOC/mg6k6nlp8j6qxicx4c9" target="_blank">https://www.streamlake.ai/document/DOC/mg6k6nlp8j6qxicx4c9</a>
+
+                            <h5>2. 配置环境变量</h5>
+                            <p>将 <code>ep-xxx-xxx</code> 替换为您的 Vanchin 推理端点 ID，并将 <code>YOUR_VANCHIN_API_KEY</code>
+                                替换为您的 Vanchin API 密钥</p>
+
+                            <div class="code-block position-relative mb-3">
+                                <pre><code id="claude-env-macos"># Check shell type
+echo $SHELL
+
+# For Zsh
+echo 'export ANTHROPIC_BASE_URL="https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-xxx-xxx/claude-code-proxy"' >> ~/.zshrc
+echo 'export ANTHROPIC_AUTH_TOKEN="YOUR_VANCHIN_API_KEY"' >> ~/.zshrc
+echo 'export ANTHROPIC_MODEL="KAT-Coder"' >> ~/.zshrc
+echo 'export ANTHROPIC_SMALL_FAST_MODEL="KAT-Coder"' >> ~/.zshrc
+source ~/.zshrc
+
+# For Bash
+echo 'export ANTHROPIC_BASE_URL="https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-xxx-xxx/claude-code-proxy"' >> ~/.bash_profile
+echo "export ANTHROPIC_AUTH_TOKEN='YOUR_VANCHIN_API_KEY'" >> ~/.bash_profile
+echo 'export ANTHROPIC_MODEL="KAT-Coder"' >> ~/.bash_profile
+echo 'export ANTHROPIC_SMALL_FAST_MODEL="KAT-Coder"' >> ~/.bash_profile
+source ~/.bash_profile</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="claude-env-macos">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header">
-                            <h4>二、运行 Claude Code</h4>
+                        <div class="card-header bg-info text-white">
+                            <h4 class="mb-0"><i class="fab fa-windows me-2"></i>Windows</h4>
                         </div>
                         <div class="card-body">
-                            <p>在终端中运行以下命令启动 Claude Code：</p>
-                            <pre><code>claude</code></pre>
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle me-2"></i>
-                                运行前检查 shell 类型并确保所有环境变量都已正确设置。
+                            <h5>1. Claude Code 安装</h5>
+                            <p>Claude Code 默认仅支持 macOS 和 Linux。您需要先安装 WSL 或 Git for Windows。请参阅<a
+                                    href="https://docs.anthropic.com/en/docs/claude-code/setup#windows-setup"
+                                    target="_blank">官方文档</a></p>
+
+                            <h5>2. 配置环境变量</h5>
+                            <p>将 <code>ep-xxx-xxx</code> 替换为您的 Vanchin 推理端点 ID，并将 <code>YOUR_VANCHIN_API_KEY</code>
+                                替换为您的 Vanchin API 密钥</p>
+
+                            <div class="code-block position-relative">
+                                <pre><code id="claude-env-windows">setx ANTHROPIC_AUTH_TOKEN "YOUR_VANCHIN_API_KEY"
+setx ANTHROPIC_BASE_URL "https://vanchin.streamlake.ai/api/gateway/v1/endpoints/ep-xxx-xxx/claude-code-proxy"
+setx ANTHROPIC_MODEL "KAT-Coder"
+setx ANTHROPIC_SMALL_FAST_MODEL "KAT-Coder"</code></pre>
+                                <button
+                                    class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                    data-copy-target="claude-env-windows">
+                                    <i class="fas fa-copy me-1"></i>复制
+                                </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-play me-2"></i>II. 运行 Claude Code</h4>
+                </div>
+                <div class="card-body">
+                    <p>在终端中运行以下命令以启动 Claude Code：</p>
+                    <div class="code-block position-relative">
+                        <pre><code id="claude-run">claude</code></pre>
+                        <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                            data-copy-target="claude-run">
+                            <i class="fas fa-copy me-1"></i>复制
+                        </button>
                     </div>
                 </div>
             </div>
@@ -248,54 +486,163 @@ print(completion.choices[0].message.content)</code></pre>
     <section class="py-5">
         <div class="container">
             <h2 class="fw-bold mb-4">Cline</h2>
-            
+            <p class="lead">Cline 是 VS Code 的 AI 编程助手扩展，可与 KAT-Coder 模型无缝集成。</p>
+
             <div class="card mb-4">
                 <div class="card-header">
                     <h3>一、安装 Cline 插件</h3>
                 </div>
                 <div class="card-body">
-                    <h4>打开扩展市场</h4>
-                    <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/75CgHHgpYetSAEO3Kg-FlYWGWyeHnGYSr243wgAjI9o" alt="打开扩展市场" class="img-fluid rounded shadow" loading="lazy">
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>安装 Cline 扩展</h5>
+                                <p>在 VS Code 中搜索并安装 Cline 扩展：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="cline-install-code">1. 打开 VS Code
+2. 按 Ctrl+Shift+X 打开扩展面板
+3. 搜索 "Cline"
+4. 点击 "安装" 按钮</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="cline-install-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <h4>安装插件</h4>
+
+                    <div class="text-center mb-4">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/75CgHHgpYetSAEO3Kg-FlYWGWyeHnGYSr243wgAjI9o"
+                            alt="打开扩展市场" class="img-fluid rounded shadow" loading="lazy">
+                    </div>
+
                     <div class="text-center">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/2VhUfB4qXwAk5YN0nH1PHX9aeep2kFWpbMD-1_RfzUg" alt="安装 Cline 插件" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/2VhUfB4qXwAk5YN0nH1PHX9aeep2kFWpbMD-1_RfzUg"
+                            alt="安装 Cline 插件" class="img-fluid rounded shadow" loading="lazy">
                     </div>
                 </div>
             </div>
-            
+
             <div class="card">
                 <div class="card-header">
                     <h3>二、配置 API 设置</h3>
                 </div>
                 <div class="card-body">
-                    <h4>选择 API Key 方法</h4>
-                    <p>选择"Use your own API Key"</p>
-                    <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/7X6qZwOjyGYNNXo_u6PCaBbVC6TW18pL_zfUvc6vWeU" alt="选择 API Key 方法" class="img-fluid rounded shadow" loading="lazy">
-                    </div>
-                    
-                    <h4>按如下方式填写配置详情：</h4>
-                    <div class="text-center">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/l5gsiwH0FCymeipJUreUAloKiltmDOlDfDKdKL4idV8" alt="填写配置详情" class="img-fluid rounded shadow" loading="lazy">
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>选择 API Key 方法</h5>
+                                <p>选择"Use your own API Key"</p>
+                                <div class="text-center mb-3">
+                                    <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/7X6qZwOjyGYNNXo_u6PCaBbVC6TW18pL_zfUvc6vWeU"
+                                        alt="选择 API Key 方法" class="img-fluid rounded shadow" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item mb-4">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>配置 API Key</h5>
+                                <p>在 VS Code 设置中添加以下配置：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="cline-settings-code">{
+  "cline.apiKey": "your-vanchin-api-key",
+  "cline.apiBaseUrl": "https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+  "cline.model": "ep-59dwym-1761224975357840539"
+}</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="cline-settings-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <small>请将 <code>ep-59dwym-1761224975357840539</code> 替换为您自己的推理端点 ID</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item mb-4">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>填写配置详情</h5>
+                                <div class="text-center">
+                                    <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/l5gsiwH0FCymeipJUreUAloKiltmDOlDfDKdKL4idV8"
+                                        alt="填写配置详情" class="img-fluid rounded shadow" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="card mt-4">
                 <div class="card-header">
                     <h3>三、开始使用</h3>
                 </div>
                 <div class="card-body">
-                    <p>配置完成后，您可以在输入框中输入请求，模型将帮助您完成各种任务，例如：</p>
-                    <ul>
-                        <li>代码生成和补全</li>
-                        <li>调试和错误修复</li>
-                        <li>代码解释和文档</li>
-                        <li>重构和优化</li>
-                    </ul>
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>验证配置</h5>
+                                <p>重启 VS Code 并打开 Cline 面板验证配置：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="cline-verify-code">1. 按 Ctrl+Shift+P 打开命令面板
+2. 输入 "Cline: Start new conversation"
+3. 输入测试消息："Hello, KAT-Coder!"</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="cline-verify-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>使用示例</h5>
+                                <div class="code-block position-relative">
+                                    <pre><code id="cline-usage-code"># 代码生成
+"Create a React component for a user profile"
+
+# 代码审查
+"Review this code and suggest improvements: [粘贴代码]"
+
+# 代码优化
+"Optimize this function: [粘贴代码]"</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="cline-usage-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <p>配置完成后，您可以在输入框中输入请求，模型将帮助您完成各种任务，例如：</p>
+                        <ul>
+                            <li>代码生成和补全</li>
+                            <li>调试和错误修复</li>
+                            <li>代码解释和文档</li>
+                            <li>重构和优化</li>
+                        </ul>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>提示：</strong> Cline 支持多种编程语言，包括 JavaScript、Python、Java、C++ 等。
+                    </div>
                 </div>
             </div>
         </div>
@@ -305,7 +652,7 @@ print(completion.choices[0].message.content)</code></pre>
     <section class="py-5 bg-light">
         <div class="container">
             <h2 class="fw-bold mb-4">Kilo Code</h2>
-            
+
             <div class="card mb-4">
                 <div class="card-header">
                     <h3>一、安装 Kilo Code 插件</h3>
@@ -313,16 +660,18 @@ print(completion.choices[0].message.content)</code></pre>
                 <div class="card-body">
                     <h4>1. 打开扩展市场</h4>
                     <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/osbDgQ-v3vmTbROzrJ2qeNjAaSNA2KdIxRUnH7sb8qg" alt="打开扩展市场" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/osbDgQ-v3vmTbROzrJ2qeNjAaSNA2KdIxRUnH7sb8qg"
+                            alt="打开扩展市场" class="img-fluid rounded shadow" loading="lazy">
                     </div>
-                    
+
                     <h4>2. 安装插件</h4>
                     <div class="text-center">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/U8eISfQKWSPsXuBvW-GuAIWiCDWoRj1nQ_CsIp9luZ0" alt="安装 Kilo Code 插件" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/U8eISfQKWSPsXuBvW-GuAIWiCDWoRj1nQ_CsIp9luZ0"
+                            alt="安装 Kilo Code 插件" class="img-fluid rounded shadow" loading="lazy">
                     </div>
                 </div>
             </div>
-            
+
             <div class="card">
                 <div class="card-header">
                     <h3>二、配置 API 设置</h3>
@@ -331,17 +680,38 @@ print(completion.choices[0].message.content)</code></pre>
                     <h4>1. 选择 API Key 选项</h4>
                     <p>选择"Use your own API Key"</p>
                     <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/YG8iViF7WtLRV6Wgk3h0m5MGASAd9udhNW2qvEhJ71w" alt="选择 API Key 选项" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/YG8iViF7WtLRV6Wgk3h0m5MGASAd9udhNW2qvEhJ71w"
+                            alt="选择 API Key 选项" class="img-fluid rounded shadow" loading="lazy">
                     </div>
-                    
+
                     <h4>2. 填写配置详情</h4>
                     <p>请填写以下信息：</p>
                     <div class="text-center">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/xIpaqoNprzV2K7iI0ktBVc-xOKGXG3ebNSzs7dbUnUA" alt="填写配置详情" class="img-fluid rounded shadow" loading="lazy">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/xIpaqoNprzV2K7iI0ktBVc-xOKGXG3ebNSzs7dbUnUA"
+                            alt="填写配置详情" class="img-fluid rounded shadow" loading="lazy">
+                    </div>
+
+                    <div class="mt-4">
+                        <h5>配置代码示例</h5>
+                        <div class="code-block position-relative">
+                            <pre><code id="kilo-settings-code">{
+  "kilo.apiKey": "your-vanchin-api-key",
+  "kilo.apiBaseUrl": "https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+  "kilo.model": "ep-59dwym-1761224975357840539"
+}</code></pre>
+                            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                data-copy-target="kilo-settings-code">
+                                <i class="fas fa-copy me-1"></i>复制
+                            </button>
+                        </div>
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <small>请将 <code>ep-59dwym-1761224975357840539</code> 替换为您自己的推理端点 ID</small>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+
             <div class="card mt-4">
                 <div class="card-header">
                     <h3>三、开始使用</h3>
@@ -354,6 +724,29 @@ print(completion.choices[0].message.content)</code></pre>
                         <li>生成测试用例</li>
                         <li>优化性能</li>
                     </ul>
+
+                    <div class="mt-4">
+                        <h5>使用示例</h5>
+                        <div class="code-block position-relative">
+                            <pre><code id="kilo-usage-code"># 代码生成
+"Create a Python function to calculate factorial"
+
+# 代码审查
+"Review this code and suggest improvements: [粘贴代码]"
+
+# 代码优化
+"Optimize this algorithm: [粘贴代码]"</code></pre>
+                            <button class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                data-copy-target="kilo-usage-code">
+                                <i class="fas fa-copy me-1"></i>复制
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success mt-4">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>提示：</strong> Kilo Code 支持多种编程语言，包括 Python、JavaScript、Java、C++、Go 等。
+                    </div>
                 </div>
             </div>
         </div>
@@ -363,52 +756,156 @@ print(completion.choices[0].message.content)</code></pre>
     <section class="py-5">
         <div class="container">
             <h2 class="fw-bold mb-4">Roo Code</h2>
-            
+            <p class="lead">Roo Code 是高效的 AI 编程助手，可与 KAT-Coder 模型无缝集成。</p>
+
             <div class="card mb-4">
                 <div class="card-header">
                     <h3>一、安装 Roo Code 插件</h3>
                 </div>
                 <div class="card-body">
-                    <h4>1. 打开扩展市场</h4>
-                    <p>导航到 IDE 中的扩展部分</p>
-                    
-                    <h4>2. 安装插件</h4>
-                    <p>搜索"Roo Code"并点击安装</p>
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>打开扩展市场</h5>
+                                <p>在 VS Code 中导航到扩展部分：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="roo-install-code">1. 打开 VS Code
+2. 按 Ctrl+Shift+X 打开扩展面板
+3. 搜索 "Roo Code"
+4. 点击 "安装" 按钮</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="roo-install-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mb-4">
+                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/cZduBDTYN-kus1Yv1X9jpfaS3xYzQScQ0MfNYM5IPEo"
+                            alt="Roo Code 配置" class="img-fluid rounded shadow" loading="lazy">
+                    </div>
                 </div>
             </div>
-            
-            <div class="card">
+
+            <div class="card mb-4">
                 <div class="card-header">
                     <h3>二、配置 API 设置</h3>
                 </div>
                 <div class="card-body">
-                    <h4>1. 填写配置详情</h4>
-                    <p>请输入以下信息：</p>
-                    <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/cZduBDTYN-kus1Yv1X9jpfaS3xYzQScQ0MfNYM5IPEo" alt="Roo Code 配置" class="img-fluid rounded shadow" loading="lazy">
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>选择 API Key 选项</h5>
+                                <p>选择"Use your own API Key"</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item mb-4">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>填写配置详情</h5>
+                                <p>在 VS Code 设置中添加以下配置：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="roo-settings-code">{
+  "roo.apiKey": "your-vanchin-api-key",
+  "roo.apiBaseUrl": "https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+  "roo.model": "ep-59dwym-1761224975357840539"
+}</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="roo-settings-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <small>请将 <code>ep-59dwym-1761224975357840539</code> 替换为您自己的推理端点 ID</small>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="card mt-4">
+
+            <div class="card">
                 <div class="card-header">
                     <h3>三、权限设置和使用</h3>
                 </div>
                 <div class="card-body">
-                    <h4>1. 配置权限</h4>
-                    <p>根据您的需求选择要允许的权限：</p>
-                    <div class="text-center mb-4">
-                        <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/MxduPjVwh80ItfmIreklFviMvsvDG4EM3OHKT1NfxbU" alt="权限设置" class="img-fluid rounded shadow" loading="lazy">
+                    <div class="integration-steps">
+                        <div class="step-item mb-4">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h5>配置权限</h5>
+                                <p>根据您的需求选择要允许的权限：</p>
+                                <div class="text-center mb-3">
+                                    <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/MxduPjVwh80ItfmIreklFviMvsvDG4EM3OHKT1NfxbU"
+                                        alt="权限设置" class="img-fluid rounded shadow" loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item mb-4">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h5>验证配置</h5>
+                                <p>重启 VS Code 并打开 Roo Code 面板验证配置：</p>
+                                <div class="code-block position-relative">
+                                    <pre><code id="roo-verify-code">1. 按 Ctrl+Shift+P 打开命令面板
+2. 输入 "Roo Code: Start new conversation"
+3. 输入测试消息："Hello, KAT-Coder!"</code></pre>
+                                    <button
+                                        class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                        data-copy-target="roo-verify-code">
+                                        <i class="fas fa-copy me-1"></i>复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h5>开始使用</h5>
+                                <p>在输入框中输入请求。Roo Code 可以帮助您：</p>
+                                <ul>
+                                    <li>代码生成和补全</li>
+                                    <li>项目设置和脚手架</li>
+                                    <li>数据库查询和 ORM</li>
+                                    <li>API 开发和测试</li>
+                                </ul>
+
+                                <div class="mt-4">
+                                    <h5>使用示例</h5>
+                                    <div class="code-block position-relative">
+                                        <pre><code id="roo-usage-code"># 代码生成
+"Create a Java class for a simple calculator"
+
+# 代码审查
+"Review this code and suggest improvements: [粘贴代码]"
+
+# 代码优化
+"Optimize this database query: [粘贴代码]"</code></pre>
+                                        <button
+                                            class="btn btn-sm btn-outline-primary position-absolute top-0 end-0 m-2 copy-btn"
+                                            data-copy-target="roo-usage-code">
+                                            <i class="fas fa-copy me-1"></i>复制
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <h4>2. 开始使用</h4>
-                    <p>在输入框中输入请求。Roo Code 可以帮助您：</p>
-                    <ul>
-                        <li>代码生成和补全</li>
-                        <li>项目设置和脚手架</li>
-                        <li>数据库查询和 ORM</li>
-                        <li>API 开发和测试</li>
-                    </ul>
+
+                    <div class="alert alert-success mt-4">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>提示：</strong> Roo Code 支持多种编程语言，包括 Java、Python、JavaScript、C#、Go 等。
+                    </div>
                 </div>
             </div>
         </div>
@@ -417,27 +914,22 @@ print(completion.choices[0].message.content)</code></pre>
     <!-- Footer -->
     <footer class="footer bg-dark text-light py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
                     <h4><i class="fas fa-robot me-2"></i>KAT-Coder</h4>
-                    <p>开发工具集成指南</p>
+                    <p class="mb-0">开发工具集成指南</p>
                 </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5>快速链接</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="text-light">首页</a></li>
-                        <li><a href="integration-guide.html" class="text-light">集成指南</a></li>
-                        <li><a href="documentation.html" class="text-light">文档</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 mb-4 mb-lg-0">
-                    <h5>支持的工具</h5>
-                    <ul class="list-unstyled">
-                        <li>Claude Code</li>
-                        <li>Cline</li>
-                        <li>Kilo Code</li>
-                        <li>Roo Code</li>
-                    </ul>
+                <div class="col-lg-6 text-lg-end">
+                    <div class="d-flex flex-column flex-lg-row gap-3 justify-content-lg-end">
+                        <a href="https://www.streamlake.ai/product/kat-coder" class="btn btn-outline-light btn-sm"
+                            target="_blank">
+                            <i class="fas fa-external-link-alt me-2"></i>官方网站
+                        </a>
+                        <a href="https://www.streamlake.ai/document/DOC/mg6k6nlp8j6qxicx4c9"
+                            class="btn btn-outline-light btn-sm" target="_blank">
+                            <i class="fas fa-book me-2"></i>官方文档
+                        </a>
+                    </div>
                 </div>
             </div>
             <hr class="my-4">
@@ -448,6 +940,8 @@ print(completion.choices[0].message.content)</code></pre>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=2"></script>
+    <script src="code-highlighter.js"></script>
 </body>
+
 </html>
