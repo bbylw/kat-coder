@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="KAT-Coder文档，包含API配置、使用指南、常见问题解答等详细信息。">
+    <meta name="keywords" content="KAT-Coder, 文档, API配置, 使用指南, FAQ, 开发工具">
+    <title>文档 - KAT-Coder</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-robot me-2"></i>KAT-Coder</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="integration-guide.html">集成指南</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 文档 Page -->
+    <div class="container-fluid mt-5 pt-5">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-3 doc-sidebar bg-light p-4 d-none d-lg-block">
+                <h5 class="mb-4">文档</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#getting-started">Getting Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#installation">Configuration Guide</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#api-reference">Vanchin Platform API</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9 doc-content p-4">
+                <div class="d-lg-none mb-4">
+                    <h1>文档</h1>
+                    <select class="form-select" id="mobile-toc">
+                        <option value="">Select a section...</option>
+                        <option value="getting-started">Getting Started</option>
+                        <option value="installation">Configuration Guide</option>
+                        <option value="api-reference">Vanchin Platform API</option>
+                        <option value="faq">FAQ</option>
+                    </select>
+                </div>
+                
+                <!-- Getting Started Section -->
+                <div class="doc-section" id="getting-started">
+                    <h3>开始使用 KAT-Coder</h3>
+                    <p>KAT-Coder 系列模型专为 Agentic Coding 任务设计。KAT-Coder-Pro 和 KAT-Coder-Air 模型支持与 Claude Code、Cline、Kilo Code 和 Roo Code 集成。</p>
+                    
+                    <p>从 Vanchin 平台获取 API Key 并创建推理端点后，您就可以在各种 Agent 产品中配置和使用。</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>注意：</strong>详细的配置步骤请参考<a href="integration-guide.html">集成指南</a>页面。
+                    </div>
+                </div>
+                
+                <!-- Installation Section -->
+                <div class="doc-section" id="installation">
+                    <h3>配置指南</h3>
+                    <p>按照以下步骤配置 KAT-Coder 模型与开发工具的集成：</p>
+                    
+                    <h4>步骤一：获取 Vanchin API Key</h4>
+                    <ol>
+                        <li>登录 Vanchin 平台</li>
+                        <li>点击左侧菜单 [API Key]</li>
+                        <li>点击"Create API Key"</li>
+                        <li>安全保管生成的 API Key</li>
+                    </ol>
+                    
+                    <h4>步骤二：创建推理端点</h4>
+                    <ol>
+                        <li>登录 Vanchin 平台</li>
+                        <li>点击左侧菜单 [模型] → [推理]</li>
+                        <li>点击"创建推理端点"</li>
+                        <li>选择 KAT-Coder 模型</li>
+                        <li>配置推理参数</li>
+                        <li>复制推理端点 ID</li>
+                    </ol>
+                    
+                    <h4>步骤三：配置开发工具</h4>
+                    <p>根据您使用的开发工具，参考<a href="integration-guide.html">集成指南</a>进行详细配置。</p>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>环境变量配置示例：</strong>
+                        <pre>export VC_API_KEY="your-api-key-here"</pre>
+                    </div>
+                </div>
+                
+                <!-- Features Guide -->
+                <div class="doc-section" id="features-guide">
+                    <h3>功能指南</h3>
+                    <p>快手StreamLake AI编程产品矩阵提供了丰富的功能，全面提升您的开发体验：</p>
+                    
+                    <h4>KAT-Coder核心功能</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>代码理解与生成</h5>
+                            <p>基于大规模预训练模型，KAT-Coder能够深度理解代码上下文，生成高质量代码片段。</p>
+                            <ul>
+                                <li>上下文感知的代码补全</li>
+                                <li>函数和类的自动生成</li>
+                                <li>代码重构建议</li>
+                </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>智能调试与优化</h5>
+                            <p>识别代码中的潜在问题，提供详细的修复建议和性能优化方案。</p>
+                            <ul>
+                                <li>错误检测与修复建议</li>
+                                <li>性能瓶颈分析</li>
+
+                </ul>
+                        </div>
+                    </div>
+                    
+                    <h4>CodeFlicker智能开发工具</h4>
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-body">
+                            <h5>双重开发模式</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-bolt text-primary me-2"></i>Jam模式</h6>
+                                    <p>基于仓库级上下文实时感知，自主完成工程级代码生成与改写。</p>
+                                    <ul>
+                                        <li>实时感知仓库上下文</li>
+                                        <li>自主生成工程级代码</li>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <h6><i class="fas fa-users text-info me-2"></i>Duet模式</h6>
+                                    <p>以深度研究和任务规划为核心，在复杂系统和企业级场景中展现更精准的生成表现。</p>
+                                    <ul>
+                                        <li>深度研究技术方案</li>
+                                        <li>智能任务规划</li>
+                                        <li>企业级场景优化</li>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5>DeepWiki代码仓库说明书</h5>
+                    <p>深度融合大模型技术与工程实践，自动为企业代码仓库生成结构清晰、术语准确、架构明确的"仓库说明书"。</p>
+                    <ul>
+                        <li>自动生成项目架构文档</li>
+                        <li>业务术语和模块关系梳理</li>
+
+                    
+                    <h4>Web开发闭环</h4>
+                    <p>从视图开发、逻辑开发到调试及部署的端到端无缝衔接支撑：</p>
+                    <ul>
+                        <li><strong>设计稿转代码：</strong>内置Figma工具，轻松将设计稿转换为高还原度生产级代码</li>
+                        <li><strong>逻辑开发：</strong>智能生成业务逻辑代码</li>
+                        <li><strong>实时调试：</strong>一键实时预览/调试</li>
+    
+                    
+                    <h4>多语言支持</h4>
+                    <p>根据不同版本，支持不同规模的编程语言：</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>KAT-Coder-Air（20+语言）</h6>
+                            <ul>
+                                <li>JavaScript/TypeScript</li>
+                                <li>Python</li>
+                                <li>Java</li>
+
+                        </div>
+                        <div class="col-md-4">
+                            <h6>KAT-Coder-Pro（50+语言）</h6>
+                            <ul>
+                                <li>包含Air版本所有语言</li>
+                                <li>Go</li>
+                                <li>Rust</li>
+                                <li>Swift</li>
+
+                        </div>
+                        <div class="col-md-4">
+                            <h6>KAT-Coder-Exp（全面支持）</h6>
+                            <ul>
+                                <li>包含Pro版本所有语言</li>
+                                <li>小众编程语言</li>
+                                <li>领域特定语言（DSL）</li>
+                                <li>自定义语言扩展</li>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- API Reference -->
+                <div class="doc-section" id="api-reference">
+                    <h3>Vanchin 平台 API 配置</h3>
+                    <p>KAT-Coder 系列模型通过 Vanchin 平台提供服务。以下是详细的 API 配置信息：</p>
+                    
+                    <h4>获取 API Key</h4>
+                    <p>登录 Vanchin 平台 > 左侧菜单 [API Key] > 点击"Create API Key"</p>
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>字段</th>
+                                    <th>描述</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>系统生成，不可编辑</td>
+                                </tr>
+                                <tr>
+                                    <td>权限</td>
+                                    <td>目前仅支持全部（可访问项目下的所有资源）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>重要：</strong>请安全保管生成的 API Key
+                    </div>
+                    
+                    <h4>环境变量配置（推荐）</h4>
+                    <pre class="bg-dark text-light p-3 rounded">export VC_API_KEY="your-api-key-here"</pre>
+                    
+                    <h4>准备推理端点</h4>
+                    <p>登录 Vanchin 平台 > 左侧菜单 <strong>[模型] → [推理]</strong> > 点击"创建推理端点"</p>
+                    <ol>
+                        <li>选择 <strong>KAT-Coder</strong> 模型</li>
+                        <li>配置推理参数</li>
+                        <li>复制推理端点 ID</li>
+                    </ol>
+                    
+                    <h4>API 调用示例</h4>
+                    <p><strong>方法1：使用 curl 命令</strong></p>
+                    <pre class="bg-dark text-light p-3 rounded"><code>curl 'https://vanchin.streamlake.ai/api/gateway/v1/endpoints/chat/completions' \
+-H "Authorization: Bearer $VC_API_KEY" \
+-H 'Content-Type: application/json' \
+-d '{
+    "model": "ep-59dwym-1761224975357840539", 
+    "messages": [ 
+        {
+            "role": "system",
+            "content": "You are an AI assistant."
+        },
+        {
+            "role": "user",
+            "content": "Please introduce the eight planets of the solar system"
+        }
+    ]
+}'</code></pre>
+                    
+                    <p><strong>方法2：使用 OpenAI Python SDK</strong></p>
+                    <pre class="bg-dark text-light p-3 rounded"><code>import os
+from openai import OpenAI
+
+# 初始化 OpenAI 客户端
+client = OpenAI(
+    base_url="https://vanchin.streamlake.ai/api/gateway/v1/endpoints",
+    api_key=os.environ.get("VC_API_KEY")
+)
+
+# 单轮对话
+completion = client.chat.completions.create(
+    model="ep-59dwym-1761224975357840539",
+    messages=[
+        {"role": "system", "content": "You are an AI assistant"},
+        {"role": "user", "content": "Please introduce the eight planets of the solar system"},
+    ],
+)
+print(completion.choices[0].message.content)</code></pre>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>参数说明：</strong>
+                        <ul class="mb-0">
+                            <li><code>model</code>: 推理端点 ID（从 Vanchin 平台获取）</li>
+                            <li><code>messages</code>: 对话消息数组，包含 system 和 user 角色</li>
+
+                    </div>
+                    
+                    <div class="alert alert-secondary">
+                        <i class="fas fa-code me-2"></i>
+                        <strong>Python SDK 要求：</strong>
+                        <ul class="mb-0">
+                            <li>安装：<code>pip install openai</code></li>
+                            <li>设置环境变量：<code>export VC_API_KEY="your-api-key-here"</code></li>
+                            <li>确保网络连接正常，可以访问 Vanchin 平台 API</li>
+
+                    </div>
+                    
+                    <h4>支持的集成工具</h4>
+                    <ul>
+                        <li><strong>Claude Code：</strong> 环境变量配置</li>
+                        <li><strong>Cline：</strong> VS Code 插件配置</li>
+                        <li><strong>Kilo Code：</strong> IDE 插件配置</li>
+
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        详细的集成配置步骤请参考<a href="integration-guide.html">集成指南</a>页面
+                    </div>
+                </div>
+                
+                
+                
+                <!-- FAQ -->
+                <div class="doc-section" id="faq">
+                    <h3>常见问题</h3>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeadingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne">
+                                    如何获取Vanchin API Key？
+                                </button>
+                            </h2>
+                            <div id="faqCollapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>登录Vanchin平台 > 左侧菜单[API Key] > 点击"Create API Key"。系统会生成一个API Key，请安全保管。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeadingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo">
+                                    支持哪些开发工具集成？
+                                </button>
+                            </h2>
+                            <div id="faqCollapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>KAT-Coder目前支持Claude Code、Cline、Kilo Code和Roo Code等主流开发工具的集成。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeadingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree">
+                                    如何创建推理端点？
+                                </button>
+                            </h2>
+                            <div id="faqCollapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>登录Vanchin平台 > 左侧菜单[模型] → [推理] > 点击"创建推理端点"，选择KAT-Coder模型并配置参数。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeadingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour">
+                                    API Key安全如何保障？
+                                </button>
+                            </h2>
+                            <div id="faqCollapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>请妥善保管您的API Key，不要在代码中硬编码或在公共场合暴露。建议使用环境变量进行配置。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4><i class="fas fa-robot me-2"></i>KAT-Coder</h4>
+                    <p>开发工具集成指南</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light">首页</a></li>
+                        <li><a href="integration-guide.html" class="text-light">集成指南</a></li>
+                </ul>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>支持的工具</h5>
+                    <ul class="list-unstyled">
+                        <li>Claude Code</li>
+                        <li>Cline</li>
+                        <li>Kilo Code</li>
+                        <li>Roo Code</li>
+
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 KAT-Coder 集成指南</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Handle mobile TOC navigation
+        document.getElementById('mobile-toc').addEventListener('change', function() {
+            if(this.value) {
+                document.getElementById(this.value).scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>

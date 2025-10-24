@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="description" content="KAT-Coder开发工具集成指南，支持Claude Code、Cline、Kilo Code和Roo Code等主流开发工具的集成配置。">
+    <meta name="keywords" content="KAT-Coder, 开发工具, 集成指南, Claude Code, Cline, Kilo Code, Roo Code, Vanchin API">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAT-Coder - 开发工具集成指南</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-robot me-2"></i>KAT-Coder</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="integration-guide.html">集成指南</a></li>
+                    <li class="nav-item"><a class="nav-link" href="documentation.html">文档</a></li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section bg-gradient pt-5 pb-5">
+        <div class="container pt-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">KAT-Coder 开发工具集成指南</h1>
+                    <p class="lead mb-4">KAT-Coder 系列模型专为 Agentic Coding 任务设计。KAT-Coder-Pro 和 KAT-Coder-Air 支持与 Claude Code、Cline、Kilo Code 和 Roo Code 集成。</p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        从 Vanchin 平台获取 API Key 并创建推理端点，即可在各种 Agent 产品中配置和使用。
+                    </div>
+                    <div class="d-flex gap-3">
+                        <a href="integration-guide.html" class="btn btn-primary btn-lg">集成指南</a>
+                        <a href="documentation.html" class="btn btn-outline-primary btn-lg">文档</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="https://s1-11935.ssrcdn.com/mediacloud/demo/demo_video/T6Ykm9CZwWhq3Dy0IxBMthSY02sfvoSuQD2u0Aja1pM" alt="Vanchin API Key 配置" class="img-fluid hero-img rounded" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Tools Section -->
+    <section id="features" class="features-section py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">支持的开发工具</h2>
+                <p class="text-muted">KAT-Coder模型支持与主流开发工具集成</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="feature-icon bg-warning rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-code text-white"></i>
+                                </div>
+                                <h4 class="card-title">Claude Code</h4>
+                            </div>
+                            <p class="card-text">通过环境变量配置使用KAT-Coder模型</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>支持macOS和Linux</li>
+                                <li><i class="fas fa-check text-success me-2"></i>命令行工具</li>
+                                <li><i class="fas fa-check text-success me-2"></i>环境变量配置</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="feature-icon bg-success rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-plug text-white"></i>
+                                </div>
+                                <h4 class="card-title">Cline</h4>
+                            </div>
+                            <p class="card-text">VS Code插件，支持自定义API Key</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>VS Code扩展</li>
+                                <li><i class="fas fa-check text-success me-2"></i>图形界面配置</li>
+                                <li><i class="fas fa-check text-success me-2"></i>实时代码生成</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="feature-icon bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-bolt text-white"></i>
+                                </div>
+                                <h4 class="card-title">Kilo Code</h4>
+                            </div>
+                            <p class="card-text">IDE插件，支持多种开发环境</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>多IDE支持</li>
+                                <li><i class="fas fa-check text-success me-2"></i>自定义配置</li>
+                                <li><i class="fas fa-check text-success me-2"></i>代码辅助功能</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="feature-icon bg-info rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-cube text-white"></i>
+                                </div>
+                                <h4 class="card-title">Roo Code</h4>
+                            </div>
+                            <p class="card-text">扩展插件，支持权限配置</p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>权限管理</li>
+                                <li><i class="fas fa-check text-success me-2"></i>API配置</li>
+                                <li><i class="fas fa-check text-success me-2"></i>多种编程任务</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="fw-bold mb-4">准备集成 KAT-Coder？</h2>
+                <p class="lead mb-4">按照我们的集成指南，将 KAT-Coder 配置到您的开发工具中</p>
+                <div class="d-flex gap-3 justify-content-center">
+                    <a href="integration-guide.html" class="btn btn-primary btn-lg">集成指南</a>
+                    <a href="documentation.html" class="btn btn-outline-primary btn-lg">文档</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h4><i class="fas fa-robot me-2"></i>KAT-Coder</h4>
+                    <p>开发工具集成指南</p>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-light">首页</a></li>
+                        <li><a href="integration-guide.html" class="text-light">集成指南</a></li>
+                        <li><a href="documentation.html" class="text-light">文档</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>支持的工具</h5>
+                    <ul class="list-unstyled">
+                        <li>Claude Code</li>
+                        <li>Cline</li>
+                        <li>Kilo Code</li>
+                        <li>Roo Code</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 KAT-Coder 集成指南</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
